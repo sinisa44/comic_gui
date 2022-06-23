@@ -1,25 +1,26 @@
-import logo from './logo.svg';
-import './App.css';
+import { useEffect } from "react";
+import useMarvel from "./hooks/useMarvel";
+
+import { useDispatch, useSelector } from "react-redux";
+
+import { fetchCharacters } from "./redux/actions/marvelActions";
+
+import { request } from "./redux/http/axios.config";
 
 function App() {
-  return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
-  );
+  const dispatch = useDispatch();
+  const characters = useSelector((state) => state.marvel.characters);
+
+  useEffect(() => {
+    // dispatch(fetchCharacters());
+    request("https://jsonplaceholder.typicode.com/todos").then((response) => {
+      console.log("response", response.data);
+    });
+  }, []);
+
+  console.log("CHARACTERS", characters);
+
+  return <div className="App"></div>;
 }
 
 export default App;
