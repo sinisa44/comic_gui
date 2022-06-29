@@ -1,11 +1,16 @@
 import { configureStore } from "@reduxjs/toolkit";
+import logger from "redux-logger";
 
-import marvelReducer from "./slices/marvelSlice";
+import marvelCharacterReducer from "./slices/marvelCharacterSlice";
+
+import marvelComicReducer from "./slices/marvelComicSlice";
 
 const store = configureStore({
   reducer: {
-    marvel: marvelReducer,
+    marvelCharacters: marvelCharacterReducer,
+    marvelComics: marvelComicReducer,
   },
+  middleware: (getDefaultMiddleware) => getDefaultMiddleware().concat(logger),
 });
 
 export default store;

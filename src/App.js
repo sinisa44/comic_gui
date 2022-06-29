@@ -1,26 +1,22 @@
-import { useEffect } from "react";
-import useMarvel from "./hooks/useMarvel";
+import { Routes, Route } from "react-router-dom";
 
-import { useDispatch, useSelector } from "react-redux";
+import Navigation from "./components/navigation/navigation.component";
+import Home from "./pages/home/home.component";
+import Characters from "./pages/characters/characters.component";
+import FavoriteCharacters from "./pages/favorite-characters/favorite-characters.component";
+import Comics from "./pages/comics/comics.component";
 
-import { fetchCharacters } from "./redux/actions/marvelActions";
-
-import { request } from "./redux/http/axios.config";
-
-function App() {
-  const dispatch = useDispatch();
-  const characters = useSelector((state) => state.marvel.characters);
-
-  useEffect(() => {
-    // dispatch(fetchCharacters());
-    request("https://jsonplaceholder.typicode.com/todos").then((response) => {
-      console.log("response", response.data);
-    });
-  }, []);
-
-  console.log("CHARACTERS", characters);
-
-  return <div className="App"></div>;
-}
+const App = () => {
+  return (
+    <Routes>
+      <Route path="/" element={<Navigation />}>
+        <Route index element={<Home />} />
+        <Route path="characters/*" element={<Characters />} />
+        <Route path="comics" element={<Comics />} />
+        <Route path="favorite-characters" element={<FavoriteCharacters />} />
+      </Route>
+    </Routes>
+  );
+};
 
 export default App;

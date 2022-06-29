@@ -17,7 +17,7 @@ const useMarvel = () => {
     setMarvelUrl(queryKey);
   }, []);
 
-  return { marvelUrl };
+  return {marvelUrl};
 };
 
 export default useMarvel;
